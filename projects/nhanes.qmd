@@ -1,0 +1,6 @@
+---
+title: "NHANES Dataset Analysis"
+toc: true
+---
+
+What is the relationship between marijuana use, BMI, and physical activity in the NHANES population?

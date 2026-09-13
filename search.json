@@ -1,0 +1,422 @@
+[
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Selected projects using data, modeling, and computation to answer scientific and real-world questions."
+  },
+  {
+    "objectID": "projects.html#open-source-contributions",
+    "href": "projects.html#open-source-contributions",
+    "title": "Projects",
+    "section": "Open Source Contributions",
+    "text": "Open Source Contributions\n\nscikit-bio\nContributions to the scikit-bio scientific Python ecosystem involving Array API compatibility, testing, and support for NumPy- and PyTorch-backed scientific workflows.\nOpen Source Scientific Python Array API NumPy PyTorch Bioinformatics\nExplore Contribution →"
+  },
+  {
+    "objectID": "projects/surgical-ramp-up.html",
+    "href": "projects/surgical-ramp-up.html",
+    "title": "Surgical Ramp-Up Capacity Simulation",
+    "section": "",
+    "text": "A Monte Carlo capacity-planning analysis exploring how a hospital could increase elective surgical volume while managing downstream PACU and inpatient capacity risk."
+  },
+  {
+    "objectID": "projects/surgical-ramp-up.html#question",
+    "href": "projects/surgical-ramp-up.html#question",
+    "title": "Surgical Ramp-Up Capacity Simulation",
+    "section": "Question",
+    "text": "Question\nHow much additional elective surgical volume could a hospital safely add without creating unacceptable pressure on PACU or inpatient capacity?\nRather than treating every additional surgery as having the same operational impact, the analysis also asked how procedure type, inpatient admission, length of stay, and existing hospital census change the amount of volume the system can realistically absorb."
+  },
+  {
+    "objectID": "projects/surgical-ramp-up.html#why-it-matters",
+    "href": "projects/surgical-ramp-up.html#why-it-matters",
+    "title": "Surgical Ramp-Up Capacity Simulation",
+    "section": "Why It Matters",
+    "text": "Why It Matters\nHospitals cannot safely increase surgical volume by looking at operating-room capacity alone. More procedures can create downstream pressure in PACU and on inpatient beds, and that pressure changes depending on how many patients are admitted, how long they stay, and what the hospital census already looks like.\nA useful ramp-up plan therefore has to balance growth against capacity risk: adding volume where the system can absorb it, while slowing or pausing when inpatient census, length of stay, or emergency demand begins to push the hospital toward unsafe operating conditions."
+  },
+  {
+    "objectID": "projects/surgical-ramp-up.html#data",
+    "href": "projects/surgical-ramp-up.html#data",
+    "title": "Surgical Ramp-Up Capacity Simulation",
+    "section": "Data",
+    "text": "Data\nThe analysis used two hospital datasets stored in BigQuery:\n\nOperating-room encounters (or_encounter) — 1,034 surgical cases with procedure information, case type, surgical timing, and PACU arrival/discharge timestamps.\nHospital encounters (hsp_encounter) — 1,974 hospital stays with admission and discharge timestamps, diagnosis-related group information, and admission origin.\n\nThe two tables were linked using the hospital encounter identifier (or_csn → hsp_csn) so each surgical case could be connected to its associated inpatient stay. Before modeling, I validated the grain of both tables and confirmed that the join preserved all 1,034 surgical cases without introducing duplicate or unmatched records.\nFrom these records, I derived the measures needed for the analysis, including PACU length of stay, procedure timing, inpatient length of stay, daily surgical volume, PACU occupancy, and inpatient census."
+  },
+  {
+    "objectID": "projects/surgical-ramp-up.html#methods",
+    "href": "projects/surgical-ramp-up.html#methods",
+    "title": "Surgical Ramp-Up Capacity Simulation",
+    "section": "Methods",
+    "text": "Methods\nI approached the problem in four stages:\n\nReconstructed baseline hospital capacity\nI used surgical timing, PACU length of stay, inpatient length of stay, inpatient census, and ED-origin admissions to understand how patients moved through the system and where capacity pressure tended to accumulate.\nCompared three ramp-up strategies\nI tested:\n\nan immediate ramp, which added cases using the existing scheduling pattern;\na phased ramp, which gradually added cases with checkpoints between phases; and\na capacity-aware ramp, which attempted to place additional cases into historically lower-pressure scheduling windows.\n\nRan Monte Carlo simulations\nRather than assuming one fixed outcome, I repeatedly resampled historical patient-flow patterns to generate a distribution of possible capacity outcomes for each strategy.\nKey simulation outcomes included:\n\npeak inpatient census;\nprobability of exceeding the historical maximum census of 42;\nadditional time spent at elevated census levels;\nPACU occupancy pressure; and\nthe additional capacity exposure created by increasing surgical volume.\n\nStress-tested the recommended strategy\nThe final ramp-up plan was tested under four operating environments:\n\nnormal conditions;\ninpatient length of stay increased by 15%;\nED admissions increased by 20%; and\nboth stresses occurring together.\n\n\nThis let me evaluate not only whether a ramp-up strategy worked under typical conditions, but how resilient it remained when the hospital system was already under pressure."
+  },
+  {
+    "objectID": "projects/surgical-ramp-up.html#results",
+    "href": "projects/surgical-ramp-up.html#results",
+    "title": "Surgical Ramp-Up Capacity Simulation",
+    "section": "Results",
+    "text": "Results\nThe analysis supported a phased increase of 12 elective surgical cases over a 13-week quarter, representing approximately a 10.6% increase over the baseline quarterly volume of 113 elective cases.\nUnder normal operating conditions, the phased +12 strategy produced:\n\n\n\nMetric\nResult\n\n\n\n\nAdditional elective cases\n12\n\n\nQuarterly volume increase\n10.6%\n\n\nProbability inpatient census exceeds 42\n13.7%\n\n\nP90 peak inpatient census\n43 patients\n\n\nP90 additional time at census ≥33\n73 hours\n\n\nP90 PACU time above 4 occupied bays\n45 minutes\n\n\n\nThe simulations also showed that inpatient capacity was the primary constraint on further surgical growth. PACU pressure tended to be short-lived, while admitted surgical patients remained in the hospital for multiple days and created overlapping demand on inpatient beds.\n\nStress Testing\nThe recommended +12 strategy became substantially riskier when inpatient length of stay or emergency demand increased.\n\n\n\n\nOperating Condition\nProbability Census &gt;42\nP90 Peak Census\n\n\n\n\nNormal\n13.7%\n43\n\n\nLOS +15%\n47.0%\n49\n\n\nED Admissions +20%\n32.0%\n46\n\n\nCombined Stress\n67.8%\n52\n\n\n\nLonger inpatient stays produced the strongest individual increase in capacity risk, while the combination of longer stays and greater ED demand pushed the probability of exceeding the historical extreme census above 67%."
+  },
+  {
+    "objectID": "projects/surgical-ramp-up.html#interpretation",
+    "href": "projects/surgical-ramp-up.html#interpretation",
+    "title": "Surgical Ramp-Up Capacity Simulation",
+    "section": "Interpretation",
+    "text": "Interpretation\nThe results suggest that surgical capacity is not simply a question of how many additional procedures can be scheduled. The more important question is what downstream demand those procedures create and what condition the hospital is already in when they occur.\nUnder normal conditions, the phased +12 strategy increased elective volume while keeping the probability of exceeding the historical extreme census relatively low. That does not make +12 a permanent or unconditional capacity limit. Instead, it represents a reasonable increase under the operating conditions represented in the historical data.\nThe stress tests show why that distinction matters. Capacity risk rose sharply as inpatient length of stay and emergency demand worsened, with longer stays creating the stronger individual effect and combined stress producing the greatest pressure on the system.\nThe practical implication is that inpatient conditions should act as a control signal for surgical growth. Elective volume can be increased when census and patient flow remain stable, but the ramp should slow, pause, or be reconsidered when length of stay or emergency demand begins increasing.\nRather than producing a single scheduling number, the simulation therefore supports a conditional ramp-up strategy: increase volume gradually, monitor the system between phases, and allow current capacity conditions to determine whether the next increase should proceed."
+  },
+  {
+    "objectID": "projects/surgical-ramp-up.html#limitations",
+    "href": "projects/surgical-ramp-up.html#limitations",
+    "title": "Surgical Ramp-Up Capacity Simulation",
+    "section": "Limitations",
+    "text": "Limitations\nSeveral constraints affect how broadly these results should be interpreted.\n\nThe analysis used synthetic healthcare encounter data. The workflow is designed to resemble a real hospital capacity problem, but the numerical results should not be treated as operational guidance for an actual facility without validation against real local data.\nThe census thresholds are historical reference points, not confirmed bed-capacity limits. A census of 33 represented the historical P90 level and 42 represented the historical maximum, but neither value was verified as the hospital’s true staffed or physical capacity.\nThe simulation depends on historical patient-flow patterns. Monte Carlo resampling captures variation present in the available data, but unexpected changes in procedure mix, staffing, discharge behavior, or patient acuity may create conditions not represented in those historical patterns.\nStress testing covered a limited set of scenarios. The project explicitly modeled increased inpatient length of stay and increased ED admissions, but other operational disruptions could also affect capacity.\n\nFor those reasons, the +12 recommendation should be interpreted as a scenario-based planning estimate rather than a fixed capacity limit. In practice, the model would need to be recalibrated with current hospital data and actual staffing and bed constraints before being used for operational decisions."
+  },
+  {
+    "objectID": "projects/surgical-ramp-up.html#next-steps",
+    "href": "projects/surgical-ramp-up.html#next-steps",
+    "title": "Surgical Ramp-Up Capacity Simulation",
+    "section": "Next Steps",
+    "text": "Next Steps\nThe next step would be to move the model closer to real operational decision support.\n\nValidate the framework with real hospital data. Re-estimate patient-flow distributions, census thresholds, and staffing constraints using current facility-specific data rather than synthetic encounters.\nRecalibrate the simulation over time. Length of stay, ED demand, surgical mix, and baseline census can change, so the model should be periodically updated rather than treated as a one-time capacity estimate.\nExpand the stress scenarios. Future simulations could incorporate PACU staffing shortages, changes in procedure mix, discharge delays, seasonal demand, or multiple disruptions occurring at the same time.\nTurn the guardrails into a monitoring tool. The Green / Yellow / Red framework could be connected to current census, LOS, ED demand, and PACU staffing metrics so leaders can see when the next phase of surgical growth should proceed, hold, or pause.\n\nUltimately, the goal would be to evolve the simulation from a retrospective planning exercise into a continuously updated decision-support system."
+  },
+  {
+    "objectID": "projects/surgical-ramp-up.html#repository",
+    "href": "projects/surgical-ramp-up.html#repository",
+    "title": "Surgical Ramp-Up Capacity Simulation",
+    "section": "Repository",
+    "text": "Repository\nThe full analysis, notebook, methodology, and project presentation are available on GitHub.\nView the Surgical Ramp-Up Capacity Simulation repository →"
+  },
+  {
+    "objectID": "projects/pacu-staffing-risk.html",
+    "href": "projects/pacu-staffing-risk.html",
+    "title": "PACU Staffing Risk Simulation",
+    "section": "",
+    "text": "A Monte Carlo simulation designed to estimate when a short-staffed PACU is likely to exceed capacity and when temporary staffing should be activated."
+  },
+  {
+    "objectID": "projects/pacu-staffing-risk.html#question",
+    "href": "projects/pacu-staffing-risk.html#question",
+    "title": "PACU Staffing Risk Simulation",
+    "section": "Question",
+    "text": "Question\nWhen PACU staffing is reduced to three staffed bays, how can the surgical schedule be used to estimate whether temporary staffing should be activated before capacity problems occur?\nCase count alone cannot fully answer that question. Two schedules with the same number of procedures can create very different PACU demand depending on when patients arrive and how long they remain in recovery.\nThe project therefore asked whether historical recovery-time patterns and scheduled PACU arrivals could be combined in a simulation to estimate the probability of exceeding staffed capacity before the day begins."
+  },
+  {
+    "objectID": "projects/pacu-staffing-risk.html#why-it-matters",
+    "href": "projects/pacu-staffing-risk.html#why-it-matters",
+    "title": "PACU Staffing Risk Simulation",
+    "section": "Why It Matters",
+    "text": "Why It Matters\nPACU capacity problems are difficult to manage reactively. Once recovery demand exceeds staffed capacity, the system is already under pressure.\nA simple case count can provide an early warning, but it does not capture how cases overlap. A schedule with several closely clustered arrivals and long recovery times can create much more pressure than another schedule with the same number of procedures spread across the day.\nThat makes the staffing decision fundamentally a risk-estimation problem. Rather than asking only how many cases are scheduled, the analysis estimates how likely the schedule is to exceed available staffed capacity and uses that probability to support a proactive staffing decision.\nThe goal is not to predict the exact number of PACU patients at every moment, but to give leaders enough information to decide whether additional staffing should be activated before the day begins."
+  },
+  {
+    "objectID": "projects/pacu-staffing-risk.html#data",
+    "href": "projects/pacu-staffing-risk.html#data",
+    "title": "PACU Staffing Risk Simulation",
+    "section": "Data",
+    "text": "Data\nThe analysis used a synthetic healthcare operations dataset accessed through Google BigQuery. The primary source was the or_encounter table, which contained surgical-case and PACU timing information.\nKey fields included:\n\nor_case_id — unique surgical case identifier;\nor_pacu_arrival_dttm — timestamp for PACU arrival;\nor_pacu_discharge_dttm — timestamp for PACU discharge; and\nor_case_type — surgical case classification.\n\nPACU length of stay was calculated from the arrival and discharge timestamps. Across the historical data, the median PACU stay was 97.0 minutes and the 90th percentile was 171.7 minutes.\nDaily PACU volume was also reconstructed to identify schedules that could place greater pressure on capacity. The highest-volume observed day contained 10 PACU arrivals, compared with a historical median of 3 arrivals per day.\nThat 10-case day was retained as the primary stress-test schedule, including its actual PACU arrival times. The simulation then varied patient recovery duration while keeping the schedule itself fixed."
+  },
+  {
+    "objectID": "projects/pacu-staffing-risk.html#methods",
+    "href": "projects/pacu-staffing-risk.html#methods",
+    "title": "PACU Staffing Risk Simulation",
+    "section": "Methods",
+    "text": "Methods\nThe simulation followed four main stages:\n\nReconstruct historical PACU demand\nPACU length of stay was calculated from recorded arrival and discharge timestamps to establish the historical recovery-time distribution.\nFix the scheduled arrival pattern\nThe 10-arrival high-volume day was used as the primary stress-test schedule. Its observed PACU arrival times were held constant so the analysis could isolate uncertainty in recovery duration.\nSimulate recovery-time uncertainty\nFor each Monte Carlo iteration, PACU length of stay was resampled from the historical distribution. The sampled recovery times were added to the fixed arrival times to generate simulated discharge times.\nReconstruct occupancy and measure capacity risk\nConcurrent PACU occupancy was recalculated across each simulated day. The simulation recorded:\n\npeak PACU demand;\nwhether demand exceeded the 3 staffed bays;\ntime spent above staffed capacity; and\nexcess patient-minutes created while demand exceeded capacity.\n\n\nRepeating this process generated a distribution of possible outcomes for the same surgical schedule rather than relying on a single deterministic estimate.\nCase volume was also evaluated as an early screening tool. Schedules with 7 PACU cases were flagged for review of arrival clustering, while schedules with 8 or more cases were treated as high-risk candidates for simulation.\nThe final staffing decision was based on the schedule-specific simulated probability of exceeding three staffed bays, with a proposed activation threshold of 75% risk."
+  },
+  {
+    "objectID": "projects/pacu-staffing-risk.html#results",
+    "href": "projects/pacu-staffing-risk.html#results",
+    "title": "PACU Staffing Risk Simulation",
+    "section": "Results",
+    "text": "Results\nThe primary stress-test schedule contained 10 PACU arrivals and produced a very high probability of exceeding the available three staffed bays.\n\n\n\nMetric\nResult\n\n\n\n\nProbability of exceeding 3 staffed bays\n99.3%\n\n\nExpected time above capacity\n78.9 minutes\n\n\nExpected excess patient-minutes\n109.2\n\n\nMedian simulated peak demand\n5 patients\n\n\nP90 simulated peak demand\n6 patients\n\n\n\nThe typical simulated peak therefore exceeded staffed capacity by 2 patients, while the upper end of the simulated distribution reached 6 concurrent PACU patients.\n\n\nStaffing Decision\nUsing the proposed decision rule:\n\nActivate temporary PACU staffing when the simulated probability of exceeding 3 staffed bays is at least 75%.\n\nThe stress-test schedule clearly crossed the threshold:\n99.3% simulated risk → Activate temporary staffing\n\n\nCase Count as an Early Screen\nCase volume was useful as a first-pass warning signal, but not as the final staffing rule.\n\n\n\nPACU Cases\nScreening Action\n\n\n\n\n7 cases\nReview arrival clustering\n\n\n8+ cases\nHigh-risk candidate; run simulation\n\n\n\nThe 10-case stress-test schedule was therefore high-risk even before simulation, but the Monte Carlo model quantified how severe that risk was likely to be."
+  },
+  {
+    "objectID": "projects/pacu-staffing-risk.html#interpretation",
+    "href": "projects/pacu-staffing-risk.html#interpretation",
+    "title": "PACU Staffing Risk Simulation",
+    "section": "Interpretation",
+    "text": "Interpretation\nThe simulation shows why PACU staffing decisions should not rely on case volume alone.\nThe 10-case stress-test schedule was clearly high volume, but the more useful result was that its specific combination of arrival timing and recovery uncertainty produced a 99.3% probability of exceeding three staffed bays. That turns a vague concern about a “busy day” into a measurable staffing risk.\nThe simulated peak-demand distribution also matters. A median peak of 5 patients means that exceeding capacity was not driven only by rare extreme scenarios. In a typical simulation, demand was already about 2 patients above staffed capacity.\nThe case-count thresholds therefore work best as a screening system rather than a final decision rule. Seven cases may justify closer review, and eight or more may indicate elevated risk, but schedules with the same number of cases can behave differently depending on when patients arrive and how long they remain in PACU.\nThe main operational takeaway is:\ncase count identifies schedules worth investigating; simulation estimates whether the actual schedule creates enough capacity risk to justify additional staffing.\nFor the stress-test schedule, the simulated risk was well above the proposed 75% activation threshold, supporting temporary PACU staffing before the day begins."
+  },
+  {
+    "objectID": "projects/pacu-staffing-risk.html#limitations",
+    "href": "projects/pacu-staffing-risk.html#limitations",
+    "title": "PACU Staffing Risk Simulation",
+    "section": "Limitations",
+    "text": "Limitations\nSeveral assumptions limit how directly the simulation can be translated into real-world staffing decisions.\n\nHistorical PACU length of stay was used as a proxy for future recovery time. The model assumes that past LOS patterns are reasonably representative of future patients.\nRecovery time was sampled from the pooled historical distribution. The simulation did not predict LOS separately by procedure type, patient characteristics, or clinical acuity.\nPACU arrival times were treated as known. In practice, operating-room delays, cancellations, and changes in procedure duration could shift arrivals throughout the day.\nThree bays represented staffed capacity, not necessarily physical PACU capacity. The model evaluates whether demand exceeds the number of bays that can be actively staffed under the short-staffed scenario.\nThe simulation does not include real-time operational changes. Staffing availability, schedule adjustments, and evolving patient conditions could all change the decision once the day is underway.\n\nBecause of these assumptions, the model is best viewed as a pre-day staffing decision-support tool rather than an exact forecast of PACU occupancy."
+  },
+  {
+    "objectID": "projects/pacu-staffing-risk.html#next-steps",
+    "href": "projects/pacu-staffing-risk.html#next-steps",
+    "title": "PACU Staffing Risk Simulation",
+    "section": "Next Steps",
+    "text": "Next Steps\nA more production-ready version of the model could improve both the recovery-time estimates and the way the simulation responds to changing conditions.\n\nPredict PACU length of stay at the patient or procedure level. Rather than resampling from one pooled historical distribution, future versions could estimate recovery time using procedure type, patient characteristics, and clinical acuity.\nIncorporate real-time schedule changes. Operating-room delays, cancellations, and shifting procedure durations could be used to update expected PACU arrivals throughout the day.\nConnect staffing availability directly to the decision rule. The model could account for whether temporary staff are actually available, how quickly they can be activated, and what additional staffed capacity they provide.\nValidate the staffing threshold prospectively. The proposed 75% risk threshold could be tested against future schedules to determine whether it consistently identifies days where additional PACU staffing is warranted.\nBuild an operational dashboard or automated workflow. Scheduled cases could be screened automatically, with high-risk days triggering simulation and a simple staffing recommendation for decision-makers.\n\nThe broader goal would be to turn the analysis from a retrospective simulation into a schedule-aware staffing tool that updates as new information becomes available."
+  },
+  {
+    "objectID": "projects/pacu-staffing-risk.html#repository",
+    "href": "projects/pacu-staffing-risk.html#repository",
+    "title": "PACU Staffing Risk Simulation",
+    "section": "Repository",
+    "text": "Repository\nThe full project repository includes the Monte Carlo simulation notebook, selected visualizations, project dependencies, and an executive brief summarizing the staffing recommendation.\nView the PACU Staffing Risk Simulation repository →"
+  },
+  {
+    "objectID": "open-source.html",
+    "href": "open-source.html",
+    "title": "Open Source",
+    "section": "",
+    "text": "Contributions to the scikit-bio scientific Python ecosystem, with work involving Array API compatibility, testing, and support for NumPy and PyTorch-backed workflows.\nExplore Contribution →"
+  },
+  {
+    "objectID": "open-source.html#scikit-bio",
+    "href": "open-source.html#scikit-bio",
+    "title": "Open Source",
+    "section": "",
+    "text": "Contributions to the scikit-bio scientific Python ecosystem, with work involving Array API compatibility, testing, and support for NumPy and PyTorch-backed workflows.\nExplore Contribution →"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ankur Bambhrolia",
+    "section": "",
+    "text": "I like solving problems that matter, and biology happens to be full of them. From viruses and immune systems to evolution, conservation, and animal health, I’m fascinated by how small biological changes can create much bigger effects. A gene changes, a pathogen enters the picture, a pathway shifts—and suddenly the behavior of a cell, organ, organism, or population can look completely different. I use systems modeling, machine learning, genomics, and data analysis to follow those connections and figure out what the data is actually telling us."
+  },
+  {
+    "objectID": "index.html#data-science-computational-biology-life-sciences",
+    "href": "index.html#data-science-computational-biology-life-sciences",
+    "title": "Ankur Bambhrolia",
+    "section": "",
+    "text": "I like solving problems that matter, and biology happens to be full of them. From viruses and immune systems to evolution, conservation, and animal health, I’m fascinated by how small biological changes can create much bigger effects. A gene changes, a pathogen enters the picture, a pathway shifts—and suddenly the behavior of a cell, organ, organism, or population can look completely different. I use systems modeling, machine learning, genomics, and data analysis to follow those connections and figure out what the data is actually telling us."
+  },
+  {
+    "objectID": "index.html#featured-projects",
+    "href": "index.html#featured-projects",
+    "title": "Ankur Bambhrolia",
+    "section": "Featured Projects",
+    "text": "Featured Projects\n\n\nSurgical Ramp-Up Capacity Simulation\n\nHow much additional elective surgical volume can a hospital safely absorb without creating unacceptable pressure on PACU and inpatient capacity?\nSimulation Monte Carlo Healthcare Analytics Python BigQuery\nExplore Project →\n\n\nVibrio vulnificus Risk Analysis\n\nHow do changing environmental conditions influence the risk and geographic spread of Vibrio vulnificus along the U.S. coastline?\nInfectious Disease Geospatial Analysis Forecasting Python Power BI\nExplore Project →"
+  },
+  {
+    "objectID": "index.html#explore-my-work",
+    "href": "index.html#explore-my-work",
+    "title": "Ankur Bambhrolia",
+    "section": "Explore My Work",
+    "text": "Explore My Work\nPick a path and dive in!\n\n\nOmics & Bioinformatics\nExplore biological questions through genomic, transcriptomic, metagenomic, and other omics data.\nExplore →\n\n\nComputational Biology\nExplore biological systems through mathematical modeling, simulation, dynamics, and quantitative methods.\nExplore →\n\n\nApplied Data Science\nExplore how I use statistics, simulation, machine learning, and data analysis to solve real-world problems.\nExplore →"
+  },
+  {
+    "objectID": "applied-data-science.html",
+    "href": "applied-data-science.html",
+    "title": "Applied Data Science",
+    "section": "",
+    "text": "Explore projects using statistics, simulation, machine learning, and data analysis to solve real-world problems."
+  },
+  {
+    "objectID": "applied-data-science.html#surgical-ramp-up-capacity-simulation",
+    "href": "applied-data-science.html#surgical-ramp-up-capacity-simulation",
+    "title": "Applied Data Science",
+    "section": "Surgical Ramp-Up Capacity Simulation",
+    "text": "Surgical Ramp-Up Capacity Simulation\nHow much additional elective surgical volume can a hospital safely absorb without creating unacceptable pressure on PACU and inpatient capacity?\nExplore Project →"
+  },
+  {
+    "objectID": "applied-data-science.html#pacu-staffing-risk-simulation",
+    "href": "applied-data-science.html#pacu-staffing-risk-simulation",
+    "title": "Applied Data Science",
+    "section": "PACU Staffing Risk Simulation",
+    "text": "PACU Staffing Risk Simulation\nWhen PACU staffing is reduced, how can historical recovery patterns and simulation be used to estimate whether temporary staffing should be activated?\nExplore Project →"
+  },
+  {
+    "objectID": "applied-data-science.html#vibrio-vulnificus-risk-analysis",
+    "href": "applied-data-science.html#vibrio-vulnificus-risk-analysis",
+    "title": "Applied Data Science",
+    "section": "Vibrio vulnificus Risk Analysis",
+    "text": "Vibrio vulnificus Risk Analysis\nHow do changing environmental conditions influence the risk and geographic spread of Vibrio vulnificus along the U.S. coastline?\nExplore Project →"
+  },
+  {
+    "objectID": "applied-data-science.html#nhanes-dataset-analysis",
+    "href": "applied-data-science.html#nhanes-dataset-analysis",
+    "title": "Applied Data Science",
+    "section": "NHANES Dataset Analysis",
+    "text": "NHANES Dataset Analysis\nWhat is the relationship between marijuana use, BMI, and physical activity in the NHANES population? Explore Project →"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I love solving problems in the life sciences!\nWhat I like most about life science is the myriad of problems it gives me to solve. Whether the question involves human health, infectious disease, evolution, or something I haven’t worked with before, I enjoy learning the system, finding the important pieces, and figuring out how to approach it.\nI definitely have my favorites. I’m drawn to health science and the systems that keep us alive, but I’m equally fascinated by the stranger, more experimental side of life science. Topics like viruses, synthetic biology, and gene editing make me pause and think, “Wait… we can actually do that?!”\nWhat excites me most is figuring out why something is happening, what the data can tell us about it, and how we can turn that understanding into something useful. Sometimes that means statistics. Sometimes it means machine learning, simulation, genomics, or mathematical modeling. The method matters, but the problem comes first."
+  },
+  {
+    "objectID": "about.html#data-science-computational-biology-life-sciences",
+    "href": "about.html#data-science-computational-biology-life-sciences",
+    "title": "About",
+    "section": "",
+    "text": "I love solving problems in the life sciences!\nWhat I like most about life science is the myriad of problems it gives me to solve. Whether the question involves human health, infectious disease, evolution, or something I haven’t worked with before, I enjoy learning the system, finding the important pieces, and figuring out how to approach it.\nI definitely have my favorites. I’m drawn to health science and the systems that keep us alive, but I’m equally fascinated by the stranger, more experimental side of life science. Topics like viruses, synthetic biology, and gene editing make me pause and think, “Wait… we can actually do that?!”\nWhat excites me most is figuring out why something is happening, what the data can tell us about it, and how we can turn that understanding into something useful. Sometimes that means statistics. Sometimes it means machine learning, simulation, genomics, or mathematical modeling. The method matters, but the problem comes first."
+  },
+  {
+    "objectID": "about.html#experience",
+    "href": "about.html#experience",
+    "title": "About",
+    "section": "Experience",
+    "text": "Experience\n\nVentura Foods LLC\nQuality Assurance → Manufacturing Analytics → Operations & Inventory Reconciliation\nSaginaw, TX | 2021–Present\nAnalytics & improvement. My experience at Ventura Foods has gone well beyond analyzing data. I started in Quality Assurance working with microbiological and quality data, then moved into manufacturing analytics, where I used trend analysis, PCA, and visualization to investigate recurring problems and support process improvements through Python and R.\nProject leadership & customer work. A big part of that work was also project-based. I led production test runs, supported continuous-improvement initiatives, and helped manage projects tied to major customer programs for McDonald’s and Burger King. That meant keeping different teams aligned, communicating results and deviations, working directly with customers, and helping move a project from the initial question through testing, analysis, and next steps.\nHow I work. I enjoy being involved in that entire process. I’m comfortable digging into the technical details, but I can also step back, explain what matters, coordinate the people involved, and keep the work moving.\nOperations & reconciliation. Today, I work in operations and inventory reconciliation, tracing discrepancies across warehouse, inventory, shipment, EDI, and financial records. That work has included helping reduce net inventory discrepancies from roughly $20K to $5K in three months, while my earlier manufacturing analytics work contributed to approximately 20% fewer repeat quality events and 25% faster investigations."
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "About",
+    "section": "Education",
+    "text": "Education\n\nArizona State University\nMaster of Science — Biological Data Science\nMay 2025 | GPA: 4.0\nGraduate training in biological data analysis, genomics, statistics, and quantitative modeling, including biological modeling implemented in Python.\nSelected coursework: Biological Stastics, Functional Genomics, Applied Mathematics in Biology, R Programming, and Unix/Shell Computing.\n\n\nTexas Tech University\nBachelor of Science — Biology\nMay 2020 | GPA: 3.6\nBuilt my foundation in biology and the life sciences before moving toward computational and data-driven approaches to scientific problems."
+  },
+  {
+    "objectID": "about.html#tools-methods",
+    "href": "about.html#tools-methods",
+    "title": "About",
+    "section": "Tools & Methods",
+    "text": "Tools & Methods\n\n\nProgramming & Data\nPython, R, SQL, MySQL, BigQuery, Excel / Power Query\n\n\nModeling & Analysis\nStatistical analysis, machine learning, Monte Carlo simulation, time-series analysis, PCA, hypothesis testing\n\n\nScientific Computing\nGenomics, biological modeling, Unix / shell, Jupyter\n\n\nPython Libraries\npandas, NumPy, Matplotlib, scikit-learn, scikit-bio, PyTorch\n\n\nR Libraries\ntidyverse, dplyr, ggplot2\n\n\nVisualization & Reporting\nPower BI, Tableau, R Markdown, Quarto\n\n\nAdditional\nGit / GitHub, XML"
+  },
+  {
+    "objectID": "about.html#resume-contact",
+    "href": "about.html#resume-contact",
+    "title": "About",
+    "section": "Resume & Contact",
+    "text": "Resume & Contact\n\nGitHub\nLinkedIn\nEmail Me\nDownload Resume"
+  },
+  {
+    "objectID": "computational-biology.html",
+    "href": "computational-biology.html",
+    "title": "Computational Biology",
+    "section": "",
+    "text": "Explore projects using mathematical models, simulation, and quantitative methods to understand how biological systems behave and change."
+  },
+  {
+    "objectID": "omics.html",
+    "href": "omics.html",
+    "title": "Omics & Bioinformatics",
+    "section": "",
+    "text": "Explore projects using genomic, transcriptomic, metagenomic, and other omics data to investigate biological questions."
+  },
+  {
+    "objectID": "projects/nhanes.html",
+    "href": "projects/nhanes.html",
+    "title": "NHANES Population Health Analysis",
+    "section": "",
+    "text": "An R-based population-health analysis examining how regular marijuana use is associated with physical activity, BMI, and heart rate using NHANES data."
+  },
+  {
+    "objectID": "projects/nhanes.html#question",
+    "href": "projects/nhanes.html#question",
+    "title": "NHANES Population Health Analysis",
+    "section": "Question",
+    "text": "Question\nAre regular marijuana users more sedentary than non-regular users based on physical activity, BMI, and heart rate?\nThe analysis tested three related questions: whether regular marijuana use was associated with physical-activity status, whether average BMI differed between regular and non-regular users, and whether average heart rate differed between the two groups."
+  },
+  {
+    "objectID": "projects/nhanes.html#why-it-matters",
+    "href": "projects/nhanes.html#why-it-matters",
+    "title": "NHANES Population Health Analysis",
+    "section": "Why It Matters",
+    "text": "Why It Matters\nA sedentary lifestyle can be difficult to capture with a single measurement. Physical activity, BMI, and heart rate each describe a different piece of the picture, making it useful to examine them together rather than relying on one health indicator alone.\nThis project used regular marijuana use as the behavioral exposure and asked whether users showed measurable differences in those indicators compared with people who did not regularly use marijuana.\nThe larger statistical question was also important: does finding a statistically significant difference necessarily mean that the difference is large enough to matter biologically or practically? The results provided a useful example of why those are not always the same thing."
+  },
+  {
+    "objectID": "projects/nhanes.html#data",
+    "href": "projects/nhanes.html#data",
+    "title": "NHANES Population Health Analysis",
+    "section": "Data",
+    "text": "Data\nThe analysis used 2009–2012 National Health and Nutrition Examination Survey (NHANES) data. The original dataset contained approximately 10,000 participants and 76 variables.\nParticipants with missing regular-marijuana-use responses were removed, leaving a study population of 4,941 adults ages 18–59.\nThe analysis focused on four variables:\n\nRegular marijuana use — whether a participant reported regularly using marijuana, defined in the project as at least once per month over the course of a year;\nPhysical activity — whether the participant reported engaging in moderate- or vigorous-intensity sports, fitness, or recreational activity;\nBMI — body mass index measured in kg/m²;\nheart rate — heart rate measured in beats per minute.\n\nAdditional missing values were handled separately for each outcome, leaving 4,915 participants for the BMI analysis and 4,863 for the heart rate analysis. ## Methods\nThe analysis followed three main stages:\n\nData preparation in R\nParticipant-level NHANES files were cleaned and combined into an analysis-ready dataset centered on marijuana-use status, BMI, and sex.\nExploratory analysis and assumption checking\nHistograms and box plots were used to examine BMI distributions and compare groups, while Q-Q plots helped evaluate whether the data were reasonably consistent with assumptions required for parametric testing.\nStatistical comparison of groups\nT-tests and confidence intervals were applied to determine whether observed differences in BMI between groups were larger than would reasonably be expected from sampling variation alone.\n\nThe full workflow was documented in RMarkdown, keeping the statistical analysis, visualizations, and interpretation together in a reproducible report."
+  },
+  {
+    "objectID": "projects/nhanes.html#results",
+    "href": "projects/nhanes.html#results",
+    "title": "NHANES Population Health Analysis",
+    "section": "Results",
+    "text": "Results\nThe analysis produced a somewhat unexpected pattern: regular marijuana users were less likely to report being physically active, but their average BMI and heart rate were slightly lower than those of non-regular users.\n\nPhysical Activity\nAmong regular marijuana users, 52.9% reported being physically active, compared with approximately 59.5% of non-regular users.\n\nRegular marijuana users reported physical activity about 6.6 percentage points less often than non-regular users.\nA chi-squared test found a statistically significant association between regular marijuana use and physical-activity status:\n\nχ² = 17.35\np = 3.11 × 10⁻⁵\n\nRegular marijuana users appeared less often than expected in the physically active group and more often than expected in the not-physically-active group.\n\n\nBMI\nAfter removing participants with missing BMI measurements, the BMI analysis included 4,915 participants.\n\n\n\nGroup\nMean BMI\nMedian BMI\n\n\n\n\nRegular marijuana users\n28.34\n27.1\n\n\nNon-regular users\n28.78\n27.6\n\n\n\n The two groups had very similar BMI distributions, with substantial overlap and only a small difference in their centers.\nA Welch two-sample t-test identified a small difference in mean BMI:\n\nMean difference: -0.44 kg/m²\n95% CI: -0.86 to -0.02 kg/m²\np = 0.0418\n\nBecause BMI was right-skewed and contained numerous outliers, I also used a Wilcoxon rank-sum test. That comparison produced a similarly small estimated location shift of approximately -0.39 kg/m² with p = 0.0495.\nAlthough both tests were near or below the conventional 0.05 significance threshold, the magnitude of the BMI difference was very small.\n\n\nHeart Rate\nThe NHANES Pulse variable, which measures heart rate in beats per minute (BPM), was available for 4,863 participants after missing observations were removed.\n\n\n\nGroup\nMean Heart Rate\n\n\n\n\nRegular marijuana users\n72.59 BPM\n\n\nNon-regular users\n73.53 BPM\n\n\n\nA Welch two-sample t-test found:\n\nMean difference: -0.94 BPM\n95% CI: -1.69 to -0.20 BPM\np = 0.0131\n\nThe difference was statistically significant, but less than one beat per minute on average, making its practical or biological importance limited.\nOverall, the strongest finding was the association between regular marijuana use and lower reported physical activity. Differences in BMI and heart rate reached statistical significance but were small enough that statistical significance should not be confused with meaningful differences in health."
+  },
+  {
+    "objectID": "projects/nhanes.html#interpretation",
+    "href": "projects/nhanes.html#interpretation",
+    "title": "NHANES Population Health Analysis",
+    "section": "Interpretation",
+    "text": "Interpretation\nThe results tell two different stories depending on whether the focus is statistical significance or practical significance.\nThe clearest pattern appeared in physical activity. Regular marijuana use was significantly associated with physical-activity status, with regular users reporting physical activity less often than non-regular users. This supports the idea that the two variables are related within the NHANES sample, although the observational design cannot establish that marijuana use caused the difference in activity.\nBMI and heart rate produced a different result. Both comparisons reached conventional statistical significance, but the actual differences between groups were very small. Regular marijuana users had an average BMI about 0.44 kg/m² lower and an average heart rate about 0.94 BPM lower than non-regular users.\nThose differences are statistically detectable in a sample of this size, but they are not necessarily large enough to represent meaningful differences in health. In other words, a small p-value answers the question “Is there evidence of a difference?”; it does not answer “Is that difference important?”\nThe BMI analysis also illustrates why the distribution of the data matters. Because BMI was right-skewed and contained numerous outliers, the Wilcoxon rank-sum test provided a useful comparison alongside the t-test. Both approaches pointed toward only a small difference between the groups.\nTaken together, the analysis suggests that regular marijuana use was associated with lower reported physical activity, while differences in BMI and heart rate were statistically detectable but practically small."
+  },
+  {
+    "objectID": "projects/nhanes.html#limitations",
+    "href": "projects/nhanes.html#limitations",
+    "title": "NHANES Population Health Analysis",
+    "section": "Limitations",
+    "text": "Limitations\nSeveral limitations affect how strongly these results should be interpreted.\n\nThe analysis is observational. The study can identify associations between regular marijuana use and physical activity, BMI, or heart rate, but it cannot establish that marijuana use caused any of the observed differences.\nThe timing of marijuana use and physical-activity behavior was unknown. The data do not show whether participants became regular marijuana users before or after becoming more or less physically active, making the direction of the relationship unclear.\nPhysical activity was represented as a binary measure. Participants were classified according to whether they engaged in moderate- or vigorous-intensity recreational activity, but the analysis did not measure frequency, duration, or intensity in greater detail.\nBMI and heart rate provide only a limited picture of health. Although both were useful measurable outcomes, neither captures the full biological or behavioral consequences of a sedentary lifestyle.\nThe analysis did not account for other factors that could differ between marijuana-use groups. Variables such as age, diet, tobacco or alcohol use, underlying health conditions, and other lifestyle characteristics could contribute to differences in BMI, heart rate, or physical activity.\nThe BMI result was borderline depending on the statistical approach. The Wilcoxon rank-sum test produced a p-value of approximately 0.0495, placing the result very close to the conventional 0.05 threshold. Combined with the very small estimated difference, this makes the practical interpretation more important than simply classifying the test as significant or not significant.\n\nFor those reasons, the findings are best interpreted as population-level associations within this NHANES sample rather than evidence that regular marijuana use directly produces a more sedentary lifestyle."
+  },
+  {
+    "objectID": "projects/nhanes.html#next-steps",
+    "href": "projects/nhanes.html#next-steps",
+    "title": "NHANES Population Health Analysis",
+    "section": "Next Steps",
+    "text": "Next Steps\nThe analysis could be extended in several ways to better understand the relationship between regular marijuana use and sedentary behavior.\n\nExamine the timing of marijuana use and physical activity. The current study cannot determine whether participants became regular marijuana users before or after changes in their activity level. Establishing that sequence would help clarify the direction of the relationship.\nMeasure physical activity in greater detail. Rather than treating activity as a yes/no variable, future work could examine how often participants exercise and how much time they spend being physically active.\nExpand the set of health indicators. Additional measures such as blood pressure, stroke history, and other health outcomes could provide a broader picture of whether regular marijuana users differ from non-regular users in ways associated with a sedentary lifestyle.\nInclude additional behavioral measures. Variables such as time spent indoors versus outdoors could help characterize lifestyle differences that are not captured by BMI, heart rate, or a binary physical-activity measure.\n\nThe larger goal would be to move beyond asking whether the two groups differ and toward understanding how regular marijuana use, activity patterns, and health characteristics relate to one another over time."
+  },
+  {
+    "objectID": "projects/nhanes.html#repository",
+    "href": "projects/nhanes.html#repository",
+    "title": "NHANES Population Health Analysis",
+    "section": "Repository",
+    "text": "Repository\nThe full project repository includes the NHANES variable documentation, final statistical analysis, visualizations, and the R/Quarto source used to produce the report.\nView the NHANES Dataset Analysis repository →"
+  },
+  {
+    "objectID": "projects/scikit-bio.html",
+    "href": "projects/scikit-bio.html",
+    "title": "scikit-bio Open Source Contributions",
+    "section": "",
+    "text": "Contributions to the scikit-bio scientific Python library focused on Array API compatibility, scientific computing workflows, and testing across NumPy and PyTorch backends."
+  },
+  {
+    "objectID": "projects/vibrio.html",
+    "href": "projects/vibrio.html",
+    "title": "Vibrio vulnificus Risk Analysis",
+    "section": "",
+    "text": "An environmental and infectious-disease analysis exploring how changing coastal conditions relate to Vibrio vulnificus occurrence and future risk."
+  },
+  {
+    "objectID": "projects/vibrio.html#question",
+    "href": "projects/vibrio.html#question",
+    "title": "Vibrio vulnificus Risk Analysis",
+    "section": "Question",
+    "text": "Question\nHow do changing environmental conditions—particularly sea-surface temperature and salinity—relate to the occurrence, seasonality, and geographic risk of Vibrio vulnificus along U.S. coastal regions?\nThe project also asked whether those historical relationships could be used to characterize future risk. That meant looking beyond simple case counts to connect reported Vibrio activity with environmental conditions, seasonal patterns, coastal geography, and time-series behavior."
+  },
+  {
+    "objectID": "projects/vibrio.html#why-it-matters",
+    "href": "projects/vibrio.html#why-it-matters",
+    "title": "Vibrio vulnificus Risk Analysis",
+    "section": "Why It Matters",
+    "text": "Why It Matters\nVibrio vulnificus is an environmentally sensitive marine bacterium, which means changes in coastal conditions can alter where and when exposure risk is most likely to occur.\nThat makes the problem important from both a biological and surveillance perspective. If temperature, salinity, season, and geography are associated with changes in reported Vibrio activity, then those patterns can help identify when coastal environments are becoming more favorable for the organism and where risk may be shifting.\nUnderstanding those relationships also matters because environmental conditions are not static. Tracking how Vibrio activity changes alongside coastal temperature and salinity can provide a way to study how infectious-disease risk may respond to longer-term environmental change rather than treating historical case patterns as fixed."
+  },
+  {
+    "objectID": "projects/vibrio.html#data",
+    "href": "projects/vibrio.html#data",
+    "title": "Vibrio vulnificus Risk Analysis",
+    "section": "Data",
+    "text": "Data\nThe project combined infectious-disease surveillance data with long-term environmental data from three major sources:\n\nCDC surveillance data — reported Vibrio vulnificus incidence across U.S. coastal regions.\nNOAA sea-surface temperature data — long-term coastal temperature measurements used to examine how warmer water conditions relate to Vibrio activity.\nNASA salinity data — environmental salinity measurements used to evaluate whether changes in coastal salinity were associated with reported disease patterns.\n\nBecause these datasets were collected for different purposes, they did not initially line up cleanly. I cleaned, standardized, and validated the source data, then harmonized them across geographic and temporal dimensions to create a unified analysis-ready dataset.\nThe integrated dataset included reported Vibrio activity, sea-surface temperature, salinity, seasonality, coastal geography, and derived temporal and environmental features that could be used for exploratory analysis and forecasting."
+  },
+  {
+    "objectID": "projects/vibrio.html#methods",
+    "href": "projects/vibrio.html#methods",
+    "title": "Vibrio vulnificus Risk Analysis",
+    "section": "Methods",
+    "text": "Methods\nThe analysis was completed in four stages:\n\nIntegrated and harmonized the source datasets\nCDC surveillance records, NOAA sea-surface temperature data, and NASA salinity measurements differed in temporal resolution, geographic structure, missingness, and variable definitions. I cleaned and aligned the datasets so environmental conditions could be compared with reported Vibrio vulnificus activity across common spatial and temporal units.\nEngineered environmental and temporal features\nI created features representing seasonality, environmental conditions, geography, and lagged behavior so the analysis could capture both immediate relationships and patterns that developed over time.\nExplored environmental and disease patterns\nExploratory, correlational, and time-series analyses were used to examine:\n\nseasonal variation in reported Vibrio activity;\nregional differences across coastal areas;\nrelationships with sea-surface temperature and salinity; and\nlonger-term changes in disease and environmental patterns.\n\nBuilt and evaluated forecasting models\nI compared multiple time-series and machine-learning forecasting approaches using a holdout period and error metrics rather than evaluating model performance on the same observations used for training. Model selection considered predictive performance, error patterns, and how well each approach captured the seasonal structure of the data.\n\nThe final outputs were brought into Power BI to visualize historical patterns, environmental indicators, geographic variation, and projected Vibrio activity in an interactive format."
+  },
+  {
+    "objectID": "projects/vibrio.html#results",
+    "href": "projects/vibrio.html#results",
+    "title": "Vibrio vulnificus Risk Analysis",
+    "section": "Results",
+    "text": "Results\nThe analysis identified several consistent patterns across the environmental, geographic, and forecasting components of the project.\n\nSea-surface temperature showed the strongest environmental relationship with Vibrio vulnificus activity. Warmer coastal conditions were associated with increased reported activity.\nSalinity showed a weaker inverse relationship. Lower salinity tended to align with greater Vibrio activity, but the relationship was less pronounced than the temperature signal.\nStrong seasonal patterns were present. Reported Vibrio activity followed recurring seasonal changes rather than remaining constant throughout the year.\nRisk varied geographically. Coastal regions did not show identical patterns, reinforcing the importance of considering location alongside environmental conditions.\nForecasting suggested continued seasonal variation with a gradual upward trend. Among the forecasting approaches evaluated—SARIMAX, Random Forest, XGBoost, and Prophet—SARIMAX produced the strongest overall forecast because it captured both seasonal structure and environmental trends.\n\n\nEnvironmental Relationships\n\nSea-surface temperature showed a clearer positive relationship with reported Vibrio vulnificus activity, while the relationship with salinity was considerably weaker.\n\n\nForecasted Vibrio vulnificus Cases\n\nThe forecast shows short-term variation while maintaining a gradual upward trend in projected Vibrio cases through 2028. ## Interpretation\nThe results suggest that Vibrio vulnificus risk is associated with a combination of environmental conditions, seasonality, and geography rather than with time alone.\nSea-surface temperature emerged as the clearest environmental signal. Warmer coastal waters were associated with greater reported Vibrio activity, while salinity appeared to provide additional—but weaker—information about when conditions may be favorable.\nThe strong seasonal structure is also important. Risk does not increase smoothly throughout the year; instead, recurring environmental cycles create periods when conditions are more favorable for Vibrio. That helps explain why a time-series model such as SARIMAX performed well: it could represent both the repeating seasonal pattern and longer-term changes in the data.\nThe geographic variation suggests that environmental change may not affect every coastline in the same way. Local temperature, salinity, seasonality, and historical disease patterns were all associated with differences in how risk appeared across regions.\nTaken together, the analysis supports using environmental surveillance alongside disease surveillance. Rather than waiting for reported cases alone to indicate changing risk, environmental patterns may help identify when and where conditions are becoming increasingly favorable for Vibrio vulnificus."
+  },
+  {
+    "objectID": "projects/vibrio.html#limitations",
+    "href": "projects/vibrio.html#limitations",
+    "title": "Vibrio vulnificus Risk Analysis",
+    "section": "Limitations",
+    "text": "Limitations\nSeveral factors limit how strongly these results can be interpreted.\n\nThe project is observational. Associations between sea-surface temperature, salinity, and reported Vibrio vulnificus activity do not demonstrate that any single environmental variable caused changes in disease occurrence.\nThe datasets operate at different spatial scales. NOAA temperature and NASA salinity measurements are gridded environmental observations, while CDC surveillance data describe reported disease activity. Connecting those sources required geographic aggregation and alignment, so the environmental value assigned to a region may not represent the exact conditions experienced by an individual case.\nThe overlapping analysis period was limited by surveillance availability. Although the NOAA temperature dataset extended back to 1990 and the NASA salinity dataset to 2011, the temperature data were ultimately filtered to 2018 onward to align with the available BEAM surveillance period.\nEnvironmental datasets contained missing observations and measurement uncertainty. Missing SST and salinity values were removed during preprocessing, and the NASA salinity product itself includes formal and empirical uncertainty measures.\nForecasts depend on historical patterns continuing into the future. SARIMAX and the other forecasting models can represent seasonality and trends present in the observed data, but unusual environmental events, changes in surveillance practices, or shifts in human exposure could produce future patterns that the historical data do not capture.\n\nFor those reasons, the forecasts should be interpreted as model-based projections of future patterns rather than predictions of exact future case counts."
+  },
+  {
+    "objectID": "projects/vibrio.html#next-steps",
+    "href": "projects/vibrio.html#next-steps",
+    "title": "Vibrio vulnificus Risk Analysis",
+    "section": "Next Steps",
+    "text": "Next Steps\nThe project could be extended in several ways to make the environmental risk analysis more biologically informative and more useful for forecasting.\n\nAdd additional environmental variables. Factors such as chlorophyll concentration, precipitation, river discharge, dissolved oxygen, and coastal nutrient conditions could help explain variation that temperature and salinity alone do not capture.\nImprove spatial resolution. Instead of aggregating environmental conditions broadly by region or state, future work could model risk at finer coastal locations and examine how local environmental conditions correspond with reported Vibrio activity.\nModel environmental thresholds and interactions. Rather than treating temperature and salinity as independent predictors, future analyses could test whether certain combinations of warm water and favorable salinity create nonlinear increases in risk.\nUse climate projections instead of extending historical trends alone. Future forecasts could incorporate projected sea-surface temperature and salinity under climate scenarios, allowing the analysis to estimate how suitable Vibrio conditions may shift geographically over longer time horizons.\nSeparate environmental suitability from human disease risk. A stronger future model could distinguish between conditions favorable for Vibrio growth and the human behaviors that determine exposure, such as seafood consumption or recreational water contact.\n\nUltimately, the next step would be to move from forecasting reported Vibrio activity toward an environmental suitability model that estimates where and when coastal conditions become favorable for Vibrio vulnificus."
+  },
+  {
+    "objectID": "projects/vibrio.html#repository",
+    "href": "projects/vibrio.html#repository",
+    "title": "Vibrio vulnificus Risk Analysis",
+    "section": "Repository",
+    "text": "Repository\nThe full project repository includes the exploratory analysis, geospatial analysis, forecasting notebooks, preprocessing documentation, Power BI dashboard, final report, and presentation materials.\nView the Vibrio vulnificus Risk Analysis repository →"
+  }
+]

@@ -1,0 +1,6 @@
+---
+title: "PACU Staffing Risk Simulation"
+toc: true
+---
+
+When PACU staffing is reduced, how can historical recovery patterns and simulation be used to estimate whether temporary staffing should be activated?

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Vibrio vulnificus Risk Analysis – Ankur Bambhrolia</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Ankur Bambhrolia</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#question" id="toc-question" class="nav-link active" data-scroll-target="#question">Question</a></li>
+  <li><a href="#why-it-matters" id="toc-why-it-matters" class="nav-link" data-scroll-target="#why-it-matters">Why It Matters</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
+  <ul class="collapse">
+  <li><a href="#environmental-relationships" id="toc-environmental-relationships" class="nav-link" data-scroll-target="#environmental-relationships">Environmental Relationships</a></li>
+  <li><a href="#forecasted-vibrio-vulnificus-cases" id="toc-forecasted-vibrio-vulnificus-cases" class="nav-link" data-scroll-target="#forecasted-vibrio-vulnificus-cases">Forecasted <em>Vibrio vulnificus</em> Cases</a></li>
+  </ul></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  <li><a href="#repository" id="toc-repository" class="nav-link" data-scroll-target="#repository">Repository</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><em>Vibrio vulnificus</em> Risk Analysis</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>An environmental and infectious-disease analysis exploring how changing coastal conditions relate to <em>Vibrio vulnificus</em> occurrence and future risk.</p>
+<section id="question" class="level2">
+<h2 class="anchored" data-anchor-id="question">Question</h2>
+<p><strong>How do changing environmental conditions—particularly sea-surface temperature and salinity—relate to the occurrence, seasonality, and geographic risk of <em>Vibrio vulnificus</em> along U.S. coastal regions?</strong></p>
+<p>The project also asked whether those historical relationships could be used to characterize future risk. That meant looking beyond simple case counts to connect reported <em>Vibrio</em> activity with environmental conditions, seasonal patterns, coastal geography, and time-series behavior.</p>
+</section>
+<section id="why-it-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-it-matters">Why It Matters</h2>
+<p><em>Vibrio vulnificus</em> is an environmentally sensitive marine bacterium, which means changes in coastal conditions can alter where and when exposure risk is most likely to occur.</p>
+<p>That makes the problem important from both a biological and surveillance perspective. If temperature, salinity, season, and geography are associated with changes in reported <em>Vibrio</em> activity, then those patterns can help identify when coastal environments are becoming more favorable for the organism and where risk may be shifting.</p>
+<p>Understanding those relationships also matters because environmental conditions are not static. Tracking how <em>Vibrio</em> activity changes alongside coastal temperature and salinity can provide a way to study how infectious-disease risk may respond to longer-term environmental change rather than treating historical case patterns as fixed.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>The project combined infectious-disease surveillance data with long-term environmental data from three major sources:</p>
+<ul>
+<li><strong>CDC surveillance data</strong> — reported <em>Vibrio vulnificus</em> incidence across U.S. coastal regions.</li>
+<li><strong>NOAA sea-surface temperature data</strong> — long-term coastal temperature measurements used to examine how warmer water conditions relate to <em>Vibrio</em> activity.</li>
+<li><strong>NASA salinity data</strong> — environmental salinity measurements used to evaluate whether changes in coastal salinity were associated with reported disease patterns.</li>
+</ul>
+<p>Because these datasets were collected for different purposes, they did not initially line up cleanly. I cleaned, standardized, and validated the source data, then harmonized them across geographic and temporal dimensions to create a unified analysis-ready dataset.</p>
+<p>The integrated dataset included reported <em>Vibrio</em> activity, sea-surface temperature, salinity, seasonality, coastal geography, and derived temporal and environmental features that could be used for exploratory analysis and forecasting.</p>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<p>The analysis was completed in four stages:</p>
+<ol type="1">
+<li><p><strong>Integrated and harmonized the source datasets</strong><br>
+CDC surveillance records, NOAA sea-surface temperature data, and NASA salinity measurements differed in temporal resolution, geographic structure, missingness, and variable definitions. I cleaned and aligned the datasets so environmental conditions could be compared with reported <em>Vibrio vulnificus</em> activity across common spatial and temporal units.</p></li>
+<li><p><strong>Engineered environmental and temporal features</strong><br>
+I created features representing seasonality, environmental conditions, geography, and lagged behavior so the analysis could capture both immediate relationships and patterns that developed over time.</p></li>
+<li><p><strong>Explored environmental and disease patterns</strong><br>
+Exploratory, correlational, and time-series analyses were used to examine:</p>
+<ul>
+<li>seasonal variation in reported <em>Vibrio</em> activity;</li>
+<li>regional differences across coastal areas;</li>
+<li>relationships with sea-surface temperature and salinity; and</li>
+<li>longer-term changes in disease and environmental patterns.</li>
+</ul></li>
+<li><p><strong>Built and evaluated forecasting models</strong><br>
+I compared multiple time-series and machine-learning forecasting approaches using a holdout period and error metrics rather than evaluating model performance on the same observations used for training. Model selection considered predictive performance, error patterns, and how well each approach captured the seasonal structure of the data.</p></li>
+</ol>
+<p>The final outputs were brought into <strong>Power BI</strong> to visualize historical patterns, environmental indicators, geographic variation, and projected <em>Vibrio</em> activity in an interactive format.</p>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>The analysis identified several consistent patterns across the environmental, geographic, and forecasting components of the project.</p>
+<ul>
+<li><strong>Sea-surface temperature showed the strongest environmental relationship with <em>Vibrio vulnificus</em> activity.</strong> Warmer coastal conditions were associated with increased reported activity.</li>
+<li><strong>Salinity showed a weaker inverse relationship.</strong> Lower salinity tended to align with greater <em>Vibrio</em> activity, but the relationship was less pronounced than the temperature signal.</li>
+<li><strong>Strong seasonal patterns were present.</strong> Reported <em>Vibrio</em> activity followed recurring seasonal changes rather than remaining constant throughout the year.</li>
+<li><strong>Risk varied geographically.</strong> Coastal regions did not show identical patterns, reinforcing the importance of considering location alongside environmental conditions.</li>
+<li><strong>Forecasting suggested continued seasonal variation with a gradual upward trend.</strong> Among the forecasting approaches evaluated—SARIMAX, Random Forest, XGBoost, and Prophet—<strong>SARIMAX produced the strongest overall forecast</strong> because it captured both seasonal structure and environmental trends.</li>
+</ul>
+<section id="environmental-relationships" class="level3">
+<h3 class="anchored" data-anchor-id="environmental-relationships">Environmental Relationships</h3>
+<p><img src="../images/featured/vibrio-environment.png" class="img-fluid" alt="Scatterplots comparing sea-surface temperature and sea-surface salinity with reported Vibrio vulnificus cases. Temperature shows a clearer positive relationship, while salinity shows a much weaker relationship."></p>
+<p>Sea-surface temperature showed a clearer positive relationship with reported <em>Vibrio vulnificus</em> activity, while the relationship with salinity was considerably weaker.</p>
+</section>
+<section id="forecasted-vibrio-vulnificus-cases" class="level3">
+<h3 class="anchored" data-anchor-id="forecasted-vibrio-vulnificus-cases">Forecasted <em>Vibrio vulnificus</em> Cases</h3>
+<p><img src="../images/featured/vibrio-forecast.png" class="img-fluid" style="width:80.0%" alt="Forecasted Vibrio vulnificus isolates from 2024 through 2028 showing seasonal variation and an overall upward trend"></p>
+<p>The forecast shows short-term variation while maintaining a gradual upward trend in projected <em>Vibrio</em> cases through 2028. ## Interpretation</p>
+<p>The results suggest that <em>Vibrio vulnificus</em> risk is associated with a combination of environmental conditions, seasonality, and geography rather than with time alone.</p>
+<p>Sea-surface temperature emerged as the clearest environmental signal. Warmer coastal waters were associated with greater reported <em>Vibrio</em> activity, while salinity appeared to provide additional—but weaker—information about when conditions may be favorable.</p>
+<p>The strong seasonal structure is also important. Risk does not increase smoothly throughout the year; instead, recurring environmental cycles create periods when conditions are more favorable for <em>Vibrio</em>. That helps explain why a time-series model such as SARIMAX performed well: it could represent both the repeating seasonal pattern and longer-term changes in the data.</p>
+<p>The geographic variation suggests that environmental change may not affect every coastline in the same way. Local temperature, salinity, seasonality, and historical disease patterns were all associated with differences in how risk appeared across regions.</p>
+<p>Taken together, the analysis supports using environmental surveillance alongside disease surveillance. Rather than waiting for reported cases alone to indicate changing risk, environmental patterns may help identify when and where conditions are becoming increasingly favorable for <em>Vibrio vulnificus</em>.</p>
+</section>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<p>Several factors limit how strongly these results can be interpreted.</p>
+<ul>
+<li><p><strong>The project is observational.</strong> Associations between sea-surface temperature, salinity, and reported <em>Vibrio vulnificus</em> activity do not demonstrate that any single environmental variable caused changes in disease occurrence.</p></li>
+<li><p><strong>The datasets operate at different spatial scales.</strong> NOAA temperature and NASA salinity measurements are gridded environmental observations, while CDC surveillance data describe reported disease activity. Connecting those sources required geographic aggregation and alignment, so the environmental value assigned to a region may not represent the exact conditions experienced by an individual case.</p></li>
+<li><p><strong>The overlapping analysis period was limited by surveillance availability.</strong> Although the NOAA temperature dataset extended back to 1990 and the NASA salinity dataset to 2011, the temperature data were ultimately filtered to 2018 onward to align with the available BEAM surveillance period.</p></li>
+<li><p><strong>Environmental datasets contained missing observations and measurement uncertainty.</strong> Missing SST and salinity values were removed during preprocessing, and the NASA salinity product itself includes formal and empirical uncertainty measures.</p></li>
+<li><p><strong>Forecasts depend on historical patterns continuing into the future.</strong> SARIMAX and the other forecasting models can represent seasonality and trends present in the observed data, but unusual environmental events, changes in surveillance practices, or shifts in human exposure could produce future patterns that the historical data do not capture.</p></li>
+</ul>
+<p>For those reasons, the forecasts should be interpreted as <strong>model-based projections of future patterns rather than predictions of exact future case counts</strong>.</p>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
+<p>The project could be extended in several ways to make the environmental risk analysis more biologically informative and more useful for forecasting.</p>
+<ul>
+<li><p><strong>Add additional environmental variables.</strong> Factors such as chlorophyll concentration, precipitation, river discharge, dissolved oxygen, and coastal nutrient conditions could help explain variation that temperature and salinity alone do not capture.</p></li>
+<li><p><strong>Improve spatial resolution.</strong> Instead of aggregating environmental conditions broadly by region or state, future work could model risk at finer coastal locations and examine how local environmental conditions correspond with reported <em>Vibrio</em> activity.</p></li>
+<li><p><strong>Model environmental thresholds and interactions.</strong> Rather than treating temperature and salinity as independent predictors, future analyses could test whether certain combinations of warm water and favorable salinity create nonlinear increases in risk.</p></li>
+<li><p><strong>Use climate projections instead of extending historical trends alone.</strong> Future forecasts could incorporate projected sea-surface temperature and salinity under climate scenarios, allowing the analysis to estimate how suitable <em>Vibrio</em> conditions may shift geographically over longer time horizons.</p></li>
+<li><p><strong>Separate environmental suitability from human disease risk.</strong> A stronger future model could distinguish between conditions favorable for <em>Vibrio</em> growth and the human behaviors that determine exposure, such as seafood consumption or recreational water contact.</p></li>
+</ul>
+<p>Ultimately, the next step would be to move from forecasting reported <em>Vibrio</em> activity toward an <strong>environmental suitability model that estimates where and when coastal conditions become favorable for <em>Vibrio vulnificus</em>.</strong></p>
+</section>
+<section id="repository" class="level2">
+<h2 class="anchored" data-anchor-id="repository">Repository</h2>
+<p>The full project repository includes the exploratory analysis, geospatial analysis, forecasting notebooks, preprocessing documentation, Power BI dashboard, final report, and presentation materials.</p>
+<p><a href="https://github.com/AnkurBambhrolia/Vibrio">View the Vibrio vulnificus Risk Analysis repository →</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
