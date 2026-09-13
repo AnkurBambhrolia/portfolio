@@ -1,0 +1,30 @@
+---
+title: "Applied Data Science"
+---
+Explore projects using statistics, simulation, machine learning, and data analysis to solve real-world problems.
+
+## Surgical Ramp-Up Capacity Simulation
+
+How much additional elective surgical volume can a hospital safely absorb without creating unacceptable pressure on PACU and inpatient capacity?
+
+[Explore Project →](projects/surgical-ramp-up.qmd)
+
+## PACU Staffing Risk Simulation
+
+When PACU staffing is reduced, how can historical recovery patterns and simulation be used to estimate whether temporary staffing should be activated?
+
+[Explore Project →](projects/pacu-staffing-risk.qmd)
+
+## Vibrio vulnificus Risk Analysis
+
+How do changing environmental conditions influence the risk and geographic spread of *Vibrio vulnificus* along the U.S. coastline?
+
+[Explore Project →](projects/vibrio.qmd)
+
+## NHANES Dataset Analysis
+
+What is the relationship between marijuana use, BMI, and physical activity in the NHANES population?
+[Explore Project →](projects/nhanes.qmd)
+
+
+

@@ -1,0 +1,6 @@
+---
+title: "scikit-bio Open Source Contributions"
+toc: true
+---
+
+Contributions to the scikit-bio scientific Python library focused on Array API compatibility, scientific computing workflows, and testing across NumPy and PyTorch backends.

@@ -1,0 +1,166 @@
+/* css styles */
+
+/* Featured project layout */
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+/* Featured project cards */
+
+.featured-card {
+  border: 1px solid #d9dee3;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-sizing: border-box;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.featured-card > p:last-child {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.featured-card h3 {
+  margin-top: 0;
+}
+
+/* Stack cards on smaller screens */
+@media (max-width: 768px) {
+  .featured-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Project tags */
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  margin: 0.15rem 0.1rem;
+  border: 1px solid #d9dee3;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  background: #f7f8f9;
+}
+
+/* Featured project images */
+.featured-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Explore My Work layout */
+.path-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+/* Explore My Work cards */
+.path-card {
+  border: 1px solid #d9dee3;
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.path-card h3 {
+  margin-top: 0;
+}
+
+.path-card > p:last-child {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+/* Stack paths on smaller screens */
+@media (max-width: 768px) {
+  .path-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Projects directory */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.project-card {
+  border: 1px solid #d9dee3;
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card h3 {
+  margin-top: 0;
+}
+
+.project-card > p:last-child {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.project-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem 2rem;
+}
+
+.skill-group p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.contact-links p {
+  margin: 0;
+}
+
+

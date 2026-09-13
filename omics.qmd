@@ -1,0 +1,4 @@
+---
+title: "Omics & Bioinformatics"
+---
+Explore projects using genomic, transcriptomic, metagenomic, and other omics data to investigate biological questions.

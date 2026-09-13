@@ -1,0 +1,4 @@
+---
+title: "Computational Biology"
+---
+Explore projects using mathematical models, simulation, and quantitative methods to understand how biological systems behave and change.

@@ -1,0 +1,105 @@
+---
+title: "About"
+---
+
+## Data Science | Computational Biology | Life Sciences
+
+I love solving problems in the life sciences!
+
+What I like most about life science is the *myriad* of problems it gives me to solve. Whether the question involves human health, infectious disease, evolution, or something I haven’t worked with before, I enjoy learning the system, finding the important pieces, and figuring out how to approach it.
+
+I definitely have my favorites. I’m drawn to health science and the systems that keep us alive, but I’m equally fascinated by the stranger, more experimental side of life science. Topics like viruses, synthetic biology, and gene editing make me pause and think, **“Wait... we can actually do that?!”**
+
+What excites me most is figuring out **why something is happening, what the data can tell us about it, and how we can turn that understanding into something useful.** Sometimes that means statistics. Sometimes it means machine learning, simulation, genomics, or mathematical modeling. The method matters, but the problem comes first.
+
+---
+
+## Experience
+
+### Ventura Foods LLC
+**Quality Assurance → Manufacturing Analytics → Operations & Inventory Reconciliation**  
+*Saginaw, TX | 2021–Present*
+
+**Analytics & improvement.** My experience at Ventura Foods has gone well beyond analyzing data. I started in Quality Assurance working with microbiological and quality data, then moved into manufacturing analytics, where I used trend analysis, PCA, and visualization to investigate recurring problems and support process improvements through **Python and R**.
+
+**Project leadership & customer work.** A big part of that work was also project-based. I led production test runs, supported continuous-improvement initiatives, and helped manage projects tied to major customer programs for **McDonald’s and Burger King**. That meant keeping different teams aligned, communicating results and deviations, working directly with customers, and helping move a project from the initial question through testing, analysis, and next steps.
+
+**How I work.** I enjoy being involved in that entire process. I’m comfortable digging into the technical details, but I can also step back, explain what matters, coordinate the people involved, and keep the work moving.
+
+**Operations & reconciliation.** Today, I work in operations and inventory reconciliation, tracing discrepancies across warehouse, inventory, shipment, EDI, and financial records. That work has included helping reduce net inventory discrepancies from roughly **$20K to $5K in three months**, while my earlier manufacturing analytics work contributed to approximately **20% fewer repeat quality events and 25% faster investigations**.
+
+---
+
+## Education
+
+### Arizona State University
+**Master of Science — Biological Data Science**  
+*May 2025 | GPA: 4.0*
+
+Graduate training in biological data analysis, genomics, statistics, and quantitative modeling, including biological modeling implemented in Python.
+
+**Selected coursework:** Biological Stastics, Functional Genomics, Applied Mathematics in Biology, R Programming, and Unix/Shell Computing.
+
+### Texas Tech University
+**Bachelor of Science — Biology**  
+*May 2020 | GPA: 3.6*
+
+Built my foundation in biology and the life sciences before moving toward computational and data-driven approaches to scientific problems.
+
+---
+
+## Tools & Methods
+
+:::: {.skills-grid}
+
+::: {.skill-group}
+**Programming & Data**  
+Python, R, SQL, MySQL, BigQuery, Excel / Power Query
+:::
+
+::: {.skill-group}
+**Modeling & Analysis**  
+Statistical analysis, machine learning, Monte Carlo simulation, time-series analysis, PCA, hypothesis testing
+:::
+
+::: {.skill-group}
+**Scientific Computing**  
+Genomics, biological modeling, Unix / shell, Jupyter
+:::
+
+::: {.skill-group}
+**Python Libraries**  
+pandas, NumPy, Matplotlib, scikit-learn, scikit-bio, PyTorch
+:::
+
+::: {.skill-group}
+**R Libraries**  
+tidyverse, dplyr, ggplot2
+:::
+
+::: {.skill-group}
+**Visualization & Reporting**  
+Power BI, Tableau, R Markdown, Quarto
+:::
+
+::: {.skill-group}
+**Additional**  
+Git / GitHub, XML
+:::
+
+::::
+
+----
+## Resume & Contact
+
+::: {.contact-links}
+
+[GitHub](YOUR-GITHUB)
+
+[LinkedIn](YOUR-LINKEDIN)
+
+[Email Me](mailto:YOUR-EMAIL)
+
+[Download Resume](files/Ankur-Bambhrolia-Resume.pdf)
+
+:::

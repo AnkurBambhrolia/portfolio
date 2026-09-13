@@ -1,0 +1,81 @@
+---
+title: "Projects"
+---
+
+Selected projects using data, modeling, and computation to answer scientific and real-world questions.
+
+:::: {.project-grid}
+
+::: {.project-card}
+
+### Surgical Ramp-Up Capacity Simulation
+
+![](images/featured/ramp-up-stress.png){.project-image fig-alt="Probability that inpatient census exceeds the historical extreme under normal and stressed operating conditions"}
+
+How much additional elective surgical volume can a hospital safely absorb without creating unacceptable pressure on PACU and inpatient capacity?
+
+[Simulation]{.tag} [Monte Carlo]{.tag} [Healthcare Analytics]{.tag} [Python]{.tag} [BigQuery]{.tag}
+
+[Explore Project →](projects/surgical-ramp-up.qmd)
+
+:::
+
+::: {.project-card}
+
+### PACU Staffing Risk Simulation
+
+![](images/featured/pacu-peak-demand.png){.project-image fig-alt="Distribution of simulated peak concurrent PACU demand for a busy-day surgical schedule"}
+
+When should temporary PACU staffing be activated when scheduled demand may exceed available staffed capacity?
+
+[Simulation]{.tag} [Monte Carlo]{.tag} [Capacity Planning]{.tag} [Decision Support]{.tag} [Python]{.tag} [BigQuery]{.tag}
+
+[Explore Project →](projects/pacu-staffing-risk.qmd)
+
+:::
+
+::: {.project-card}
+
+### *Vibrio vulnificus* Risk Analysis
+
+![](images/featured/vibrio-forecast.png){.project-image fig-alt="Forecasted Vibrio vulnificus cases from 2024 to 2028"}
+
+How do changing environmental conditions influence the risk and geographic spread of *Vibrio vulnificus* along the U.S. coastline?
+
+[Infectious Disease]{.tag} [Geospatial Analysis]{.tag} [Forecasting]{.tag} [Python]{.tag} [Power BI]{.tag}
+
+[Explore Project →](projects/vibrio.qmd)
+
+:::
+
+::: {.project-card}
+
+### NHANES Population Health Analysis
+
+![](images/featured/nhanes-physical-activity.jpg){.project-image fig-alt="Percentage of participants reporting physical activity among regular and non-regular marijuana users"}
+
+Are regular marijuana users more sedentary than non-regular users based on physical activity, BMI, and heart rate?
+
+[Biostatistics]{.tag} [R]{.tag} [NHANES]{.tag} [Hypothesis Testing]{.tag} [Public Health]{.tag}
+
+[Explore Project →](projects/nhanes.qmd)
+
+:::
+
+::::
+
+---
+
+## Open Source Contributions
+
+::: {.project-card}
+
+### scikit-bio
+
+Contributions to the scikit-bio scientific Python ecosystem involving Array API compatibility, testing, and support for NumPy- and PyTorch-backed scientific workflows.
+
+[Open Source]{.tag} [Scientific Python]{.tag} [Array API]{.tag} [NumPy]{.tag} [PyTorch]{.tag} [Bioinformatics]{.tag}
+
+[Explore Contribution →](projects/scikit-bio.qmd)
+
+:::

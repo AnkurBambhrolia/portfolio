@@ -1,0 +1,10 @@
+---
+title: "Open Source"
+---
+
+## scikit-bio
+
+Contributions to the scikit-bio scientific Python ecosystem, with work involving Array API compatibility, testing, and support for NumPy and PyTorch-backed workflows.
+
+[Explore Contribution →](projects/scikit-bio.qmd)
+
