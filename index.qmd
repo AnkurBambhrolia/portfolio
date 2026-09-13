@@ -6,6 +6,14 @@ title: "Ankur Bambhrolia"
 
 I like solving problems that matter, and biology happens to be full of them. From viruses and immune systems to evolution, conservation, and animal health, I’m fascinated by how small biological changes can create much bigger effects. A gene changes, a pathogen enters the picture, a pathway shifts—and suddenly the behavior of a cell, organ, organism, or population can look completely different. I use systems modeling, machine learning, genomics, and data analysis to follow those connections and figure out what the data is actually telling us.
 
+::: {.hero-actions}
+
+[Download Resume](files/Ankur-Bambhrolia-Resume.pdf){.btn .btn-primary}
+
+[Email Me](mailto:abambhrolia@gmail.come){.btn .btn-outline-primary}
+
+:::
+
 ---
 
 ## Featured Projects
