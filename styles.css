@@ -1,167 +1,76 @@
-/* css styles */
+/* =========================
+   SITE COLOR PALETTE
+   ========================= */
 
-/* Featured project layout */
-.featured-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
-}
+:root {
+  --bg: #100D18;
+  --surface: #191426;
+  --surface-hover: #211A32;
 
-/* Featured project cards */
+  --primary: #8B5CF6;
+  --secondary: #60A5FA;
+  --accent: #F59E0B;
 
-.featured-card {
-  border: 1px solid #d9dee3;
-  border-radius: 12px;
-  padding: 1.25rem;
-  box-sizing: border-box;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-
-  display: flex;
-  flex-direction: column;
-}
-
-.featured-card > p:last-child {
-  margin-top: auto;
-  padding-top: 1rem;
-}
-
-.featured-card h3 {
-  margin-top: 0;
-}
-
-/* Stack cards on smaller screens */
-@media (max-width: 768px) {
-  .featured-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Project tags */
-.tag {
-  display: inline-block;
-  padding: 0.25rem 0.6rem;
-  margin: 0.15rem 0.1rem;
-  border: 1px solid #d9dee3;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  line-height: 1.2;
-  background: #f7f8f9;
-}
-
-/* Featured project images */
-.featured-image {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-/* Explore My Work layout */
-.path-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-}
-
-/* Explore My Work cards */
-.path-card {
-  border: 1px solid #d9dee3;
-  border-radius: 12px;
-  padding: 1.25rem;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-
-  display: flex;
-  flex-direction: column;
-}
-
-.path-card h3 {
-  margin-top: 0;
-}
-
-.path-card > p:last-child {
-  margin-top: auto;
-  padding-top: 1rem;
-}
-
-/* Stack paths on smaller screens */
-@media (max-width: 768px) {
-  .path-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Projects directory */
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-}
-
-.project-card {
-  border: 1px solid #d9dee3;
-  border-radius: 12px;
-  padding: 1.25rem;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-
-  display: flex;
-  flex-direction: column;
-}
-
-.project-card h3 {
-  margin-top: 0;
-}
-
-.project-card > p:last-child {
-  margin-top: auto;
-  padding-top: 1rem;
-}
-
-.project-image {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-@media (max-width: 768px) {
-  .project-grid {
-    grid-template-columns: 1fr;
-  }
+  --text: #F5F3FF;
+  --text-muted: #AAA4B8;
+  --border: #342A48;
 }
 
 
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem 2rem;
+/* =========================
+   GLOBAL DARK THEME
+   ========================= */
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
 }
 
-.skill-group p {
-  margin: 0;
+.navbar {
+  background-color: var(--surface) !important;
 }
 
-@media (max-width: 768px) {
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
+.navbar-brand,
+.navbar-nav .nav-link {
+  color: var(--text) !important;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:hover {
+  color: var(--secondary) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text);
+}
+
+p,
+li {
+  color: var(--text);
+}
+
+a {
+  color: var(--secondary);
+}
+
+a:hover {
+  color: var(--primary);
+}
+
+hr {
+  border-color: var(--border);
+  opacity: 1;
 }
 
 
-.contact-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 1.5rem;
-  margin-top: 1rem;
-}
-
-.contact-links p {
-  margin: 0;
-}
+/* =========================
+   HOMEPAGE ACTION BUTTONS
+   ========================= */
 
 .hero-actions {
   display: flex;
@@ -176,5 +85,289 @@
   padding: 0.65rem 1.15rem;
 }
 
+.hero-actions .btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #100D18;
+}
+
+.hero-actions .btn-primary:hover {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+.hero-actions .btn-outline-primary {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.hero-actions .btn-outline-primary:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #100D18;
+}
 
 
+/* =========================
+   FEATURED PROJECTS
+   ========================= */
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.featured-card {
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-sizing: border-box;
+
+  background-color: var(--surface);
+  color: var(--text);
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  flex-direction: column;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.featured-card:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--primary);
+  border-top-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.featured-card h3 {
+  margin-top: 0;
+  color: var(--text);
+}
+
+.featured-card p {
+  color: var(--text);
+}
+
+.featured-card > p:last-child {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.featured-card a {
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+.featured-card a:hover {
+  color: var(--primary);
+}
+
+
+/* =========================
+   PROJECT TAGS
+   ========================= */
+
+.tag {
+  display: inline-block;
+
+  padding: 0.25rem 0.6rem;
+  margin: 0.15rem 0.1rem;
+
+  border: 1px solid rgba(96, 165, 250, 0.45);
+  border-radius: 999px;
+
+  background-color: rgba(96, 165, 250, 0.10);
+  color: var(--secondary);
+
+  font-size: 0.85rem;
+  line-height: 1.2;
+}
+
+
+/* =========================
+   FEATURED IMAGES
+   ========================= */
+
+.featured-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+
+/* =========================
+   EXPLORE MY WORK
+   ========================= */
+
+.path-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.path-card {
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--secondary);
+  border-radius: 12px;
+  padding: 1.25rem;
+
+  background-color: var(--surface);
+  color: var(--text);
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  flex-direction: column;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.path-card:hover {
+  background-color: var(--surface-hover);
+  border-top-color: var(--secondary);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.path-card h3 {
+  margin-top: 0;
+}
+
+.path-card > p:last-child {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.path-card a {
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+.path-card a:hover {
+  color: var(--primary);
+}
+
+
+/* =========================
+   PROJECTS DIRECTORY
+   ========================= */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.project-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+
+  background-color: var(--surface);
+  color: var(--text);
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  flex-direction: column;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.project-card:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.project-card h3 {
+  margin-top: 0;
+}
+
+.project-card > p:last-child {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.project-card a {
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+.project-card a:hover {
+  color: var(--primary);
+}
+
+.project-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+
+/* =========================
+   ABOUT — TOOLS & METHODS
+   ========================= */
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem 2rem;
+}
+
+.skill-group strong {
+  color: var(--secondary);
+}
+
+
+/* =========================
+   CONTACT LINKS
+   ========================= */
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.contact-links p {
+  margin: 0;
+}
+
+
+/* =========================
+   RESPONSIVE LAYOUT
+   ========================= */
+
+@media (max-width: 768px) {
+  .featured-grid,
+  .project-grid,
+  .path-grid,
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
